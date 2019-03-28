@@ -1,0 +1,79 @@
+# -*- coding: utf-8 -*-
+'''
+Created on 2019年1月28日
+
+@author: LKR
+'''
+
+# -*- coding: utf-8 -*-
+import random
+from fractions import Fraction
+def add(a,b):
+    return a+b
+def minus(a,b):
+    return a-b
+def multiply(a,b):
+    return a*b
+def divide(a,b):
+    return a/b
+def fraction(a,b):
+    return Fraction(a,b)
+    
+ans = 0
+print ("小学四则运算测试：(结果保留整数)")
+count = 1
+right = 0
+while(1):
+    add1 = random.randint(1, 10)  # 锟斤拷1
+    add2 = random.randint(1, 10)  # 锟斤拷2
+    t = random.random()
+    if 0<=t<=0.2:
+        ans = add(add1,add2) 
+        eq = str(add1)+'+'+str(add2)
+        print("Q%d: %s=" %(count,eq))
+        
+    elif 0.2<t<=0.4:
+        ans = minus(add1,add2)
+        eq = str(add1)+'-'+str(add2)
+        print("Q%d: %s=" %(count,eq))
+        
+    elif 0.4<t<=0.6:
+        ans = multiply(add1,add2)
+        eq = str(add1)+'*'+str(add2)
+        print("Q%d: %s=" %(count,eq))
+         
+    elif 0.6<t<=0.8:
+        ans = fraction(add1,add2)
+        eq = str(add1)+'/'+str(add2)
+        print("Q%d: %s=" %(count,eq))
+        
+    else :
+        add3 = random.randint(1, 10)  # 锟斤拷1
+        add4 = random.randint(1, 10)
+        ans = fraction(add1,add2)+fraction(add3,add4)
+        eq = str(add1)+'/'+str(add2)+'+'+str(add3)+'/'+str(add4)
+        print("Q%d: %s=" %(count,eq))
+        
+    sss = input("A%d: "%count)
+    try:
+        if round(eval(sss),5) == round(float(ans),5):
+            print('回答正确！')
+            print('正确答案：',end = '')
+            print(ans)
+            
+            right = right + 1
+        elif round(eval(sss),5) != round(float(ans),5): 
+            print('回答错误！')
+            print('正确答案：',end = '')
+            print(ans)
+            print(type(ans))
+        count += 1
+    except:
+        if sss in ['q','Q']:
+            break
+        else:
+            print("输入错误")
+            continue
+print("正确个数 %d"%right)
+print("总个数%d"%(count-1))
+print("正确率：%.2f" %(right/(count-1)))
